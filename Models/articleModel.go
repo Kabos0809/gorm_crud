@@ -10,6 +10,6 @@ type Article struct {
 	Text uint `json:"text" gorm:"default:18; not null;"`
 }
 
-func (b *User) TableName() string {
-	return "user"
+func (b *Article) TableName() string {
+	return "article"
 }
