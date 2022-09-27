@@ -1,9 +1,13 @@
 package Models
 
-type User struct {
-	ID uint `gorm:"AUTO_INCREMENT; primaryKey;"`
-	Name string `gorm:"default:Unknown; not null;"`
-	Age uint `gorm:"default:18; not null;"`
+import "time"
+
+type Article struct {
+	ID uint `json:"id" gorm:"AUTO_INCREMENT; primaryKey;"`
+	CreatedAt time.Time `json:"created_at" gorm:""`
+	UpdatedAt time.Time `json:"updated_at" gorm:""`
+	Title string `json:"title" gorm:"default:Unknown; not null;"`
+	Text uint `json:"text" gorm:"default:18; not null;"`
 }
 
 func (b *User) TableName() string {

@@ -12,7 +12,9 @@ func ConnectDB() *gorm.DB {
 	db := Database.buildDBConfig()
 	dsn := Database.DbUrl(db)
 	Db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-
+	if err != nil {
+		panic(err)
+	}
 	return Db
 }
 
