@@ -6,6 +6,8 @@ import (
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
+
 type DbConfig struct{
 	DB string
 	User string
@@ -15,14 +17,14 @@ type DbConfig struct{
 	Port string
 }
 
-func buildDBConfig() *DbConfig {
+func buildConfig() *DbConfig {
 	dbConfig := DbConfig{
-		DB = os.Getenv("POSTGRES_DB")
-		User = os.Getenv("POSTGRES_USER")
-		Pass = os.Getenv("POSTGRES_PASS")
-		Host = os.Getenv("POSTGRES_HOST")
-		TZ = os.Getenv("TZ")
-		Port = os.Getenv("POSTGRES_PORT")
+		DB: os.Getenv("POSTGRES_DB"),
+		User: os.Getenv("POSTGRES_USER"),
+		Pass: os.Getenv("POSTGRES_PASS"),
+		Host: os.Getenv("POSTGRES_HOST"),
+		TZ: os.Getenv("TZ"),
+		Port: os.Getenv("POSTGRES_PORT"),
 	}
 	return &dbConfig
 }
@@ -34,6 +36,6 @@ func DbUrl(dbConfig *DbConfig) string {
 		dbConfig.Pass,
 		dbConfig.DB,
 		dbConfig.Port,
-		dbConfig.TZ
+		dbConfig.TZ,
 	)
 }

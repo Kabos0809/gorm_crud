@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/kabos0809/gorm_crud/Models"
-	"github.com/kabos0809/gorm_crud/Router"
+	"github.com/kabos0809/gorm_crud/Routes"
 	"github.com/gin-gonic/gin"
 )
 

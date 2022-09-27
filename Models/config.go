@@ -1,5 +1,9 @@
 package Models
 
+import (
+	"gorm.io/gorm"
+)
+
 var err error
 
 type ModelInterface interface {

@@ -1,4 +1,4 @@
-package Router
+package Routes
 
 import (
 	"github.com/kabos0809/gorm_crud/Controller"
