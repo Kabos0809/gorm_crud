@@ -3,13 +3,14 @@ package main
 import (
 	"github.com/kabos0809/gorm_crud/Models"
 	"github.com/kabos0809/gorm_crud/Routes"
+	"github.com/kabos0809/gorm_crud/Database"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	gin.SetMode(gin.DebugMode)
-
-	db, err := Models.ConnectDB()
+	dbConfig := Database.buidConfig()
+	db, err := Database.DbUrl(dbconfig)
 	if err != nil {
 		panic(err)
 	}

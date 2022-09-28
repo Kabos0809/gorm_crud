@@ -3,10 +3,7 @@ package Database
 import (
 	"fmt"
 	"os"
-	"gorm.io/gorm"
 )
-
-var DB *gorm.DB
 
 type DbConfig struct{
 	DB string
@@ -26,6 +23,7 @@ func buildConfig() *DbConfig {
 		TZ: os.Getenv("TZ"),
 		Port: os.Getenv("POSTGRES_PORT"),
 	}
+	
 	return &dbConfig
 }
 
