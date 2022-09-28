@@ -1,4 +1,4 @@
-package Controller
+package Controllers
 
 import (
 	"net/http"
@@ -31,6 +31,18 @@ func (c Controller) CreateArticle(context *gin.Context) {
 //Fetch all article
 func (c Controller) GetArticle(context *gin.Context) {
 	r, err := c.Model.GetArticle()
+	if err != nil {
+		context.AbortWithStatus(http.StatusNotFound)
+	} else {
+		context.JSON(http.StatusOK, r)
+	}
+}
+
+//Fetch article by id
+func (c Controller) GetArticleById(context *gin.Context) {
+	id := context.Params.ByName("id")
+	idUint, _ := strconv.ParseUint(id, 10, 64)
+	r, err := c.Model.GetArticleById(idUint)
 	if err != nil {
 		context.AbortWithStatus(http.StatusNotFound)
 	} else {

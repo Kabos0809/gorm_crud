@@ -3,6 +3,7 @@ package Database
 import (
 	"fmt"
 	"os"
+	"github.com/joho/godotenv"
 )
 
 type DbConfig struct{
@@ -14,21 +15,26 @@ type DbConfig struct{
 	Port string
 }
 
-func buildConfig() *DbConfig {
+func buildDBConfig() *DbConfig {
+	err := godotenv.Load("../env")
+	if err != nil {
+		fmt.Println(err)	
+	}
 	dbConfig := DbConfig{
 		DB: os.Getenv("POSTGRES_DB"),
 		User: os.Getenv("POSTGRES_USER"),
-		Pass: os.Getenv("POSTGRES_PASS"),
-		Host: os.Getenv("POSTGRES_HOST"),
+		Pass: os.Getenv("POSTGRES_PASSWORD"),
+		Host: "localhost",
 		TZ: os.Getenv("TZ"),
-		Port: os.Getenv("POSTGRES_PORT"),
+		Port: "5432",
 	}
 	
 	return &dbConfig
 }
 
-func DbUrl(dbConfig *DbConfig) string {
-	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable TimeZone=%s", 
+func DbUrl() string {
+	dbConfig := buildDBConfig()
+	return fmt.Sprintf("host=%s user=%s password=%s database=%s port=%s sslmode=disable TimeZone=%s", 
 		dbConfig.Host,
 		dbConfig.User,
 		dbConfig.Pass,
