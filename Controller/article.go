@@ -9,7 +9,7 @@ import (
 )
 
 type Controller struct {
-	Model ModelInterface
+	Model Models.ModelInterface
 }
 
 //Create Article
@@ -62,7 +62,7 @@ func (c Controller) UpdateArticle(context *gin.Context) {
 //Delete article
 func (c Controller) DeleteArticle(context *gin.Context) {
 	id := context.Params.ByName("id")
-	idUint := strconv.ParseUint(id, 10, 64)
+	idUint, _:= strconv.ParseUint(id, 10, 64)
 	err := c.Model.DeleteArticle(idUint)
 	if err != nil {
 		context.AbortWithStatus(http.StatusNotFound)

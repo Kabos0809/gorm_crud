@@ -1,9 +1,5 @@
 package Models
 
-import (
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-)
 //CRUD処理
 
 //Insert new article
@@ -32,7 +28,7 @@ func (m Model) GetArticle() ([]*Article, error) {
 }
 
 //Fetch article by id
-func (m Model) GetArticleById(id uint) (*Article, error) {
+func (m Model) GetArticleById(id uint64) (*Article, error) {
 	var article Article
 	tx := m.Db.Begin()
 	err = tx.Where("id = ?", id).Find(&article).Error
@@ -57,7 +53,7 @@ func (m Model) UpdateArticle(article *Article) error {
 }
 
 //Delete article
-func (m Model) DeleteArticle(id uint) error {
+func (m Model) DeleteArticle(id uint64) error {
 	tx := m.Db.Begin()
 	err := tx.Where("id = ?", id).Delete(&Article{}).Error
 	if err != nil {
