@@ -44,7 +44,7 @@ func (c Controller) GetArticleById(context *gin.Context) {
 	idUint, _ := strconv.ParseUint(id, 10, 64)
 	r, err := c.Model.GetArticleById(idUint)
 	if err != nil {
-		context.AbortWithStatus(http.StatusNotFound)
+		context.JSON(http.StatusBadRequest, gin.H{"err":err})
 	} else {
 		context.JSON(http.StatusOK, r)
 	}
