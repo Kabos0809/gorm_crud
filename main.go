@@ -23,7 +23,7 @@ func main() {
 	sqlDB, _ := db.DB()
 	defer sqlDB.Close()
 
-	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&Models.Article{})
+	db.AutoMigrate(&Models.Article{})
 
 	controller := Models.Model{Db: db}
 

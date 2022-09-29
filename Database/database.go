@@ -16,7 +16,7 @@ type DbConfig struct{
 }
 
 func buildDBConfig() *DbConfig {
-	err := godotenv.Load("../env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		fmt.Println(err)	
 	}
@@ -24,7 +24,7 @@ func buildDBConfig() *DbConfig {
 		DB: os.Getenv("POSTGRES_DB"),
 		User: os.Getenv("POSTGRES_USER"),
 		Pass: os.Getenv("POSTGRES_PASSWORD"),
-		Host: "localhost",
+		Host: os.Getenv("HOST"),
 		TZ: os.Getenv("TZ"),
 		Port: "5432",
 	}
