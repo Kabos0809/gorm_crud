@@ -15,16 +15,16 @@ func (m Model) CreateArticle(article *Article) error {
 }
 
 //Fetch all article
-func (m Model) GetArticle() ([]*Article, error) {
-	var article []*Article
+func (m Model) GetArticle() (*[]Article, error) {
+	var article []Article
 	tx := m.Db.Begin()
-	err = tx.Find(article).Error
+	err = tx.Find(&article).Error
 	if err != nil {
 		tx.Rollback()
-		return article, err
+		return &article, err
 	}
 	tx.Commit()
-	return article, err
+	return &article, err
 }
 
 //Fetch article by id

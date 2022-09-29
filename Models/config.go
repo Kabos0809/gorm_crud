@@ -7,7 +7,7 @@ import (
 var err error
 
 type ModelInterface interface {
-	GetArticle() ([]*Article, error)
+	GetArticle() (*[]Article, error)
 	GetArticleById(id uint64) (*Article, error)
 	CreateArticle(article *Article) error 
 	UpdateArticle(article *Article) error
